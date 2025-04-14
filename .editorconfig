@@ -1,0 +1,29 @@
+# EditorConfig is a file format that helps maintain consistent coding styles
+# across different editors and IDEs.
+# For more information, visit https://editorconfig.org/
+
+# Top-most EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Configuration specific for web files
+[*.{js,jsx,ts,tsx,json,html,css,scss}]
+indent_style = space
+indent_size = 4
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# Package manager config files
+[{package.json,*.yml,*.yaml}]
+indent_style = space
+indent_size = 2
