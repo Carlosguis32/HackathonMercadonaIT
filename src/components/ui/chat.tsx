@@ -40,7 +40,6 @@ export function Chat({
     ];
 
     useEffect(() => {
-        // Efecto para mostrar progresivamente los mensajes
         const interval = setInterval(() => {
             setMessages((prevMessages) => {
                 return prevMessages.map((message) => {
@@ -62,7 +61,7 @@ export function Chat({
                     return message;
                 });
             });
-        }, 1000); // Mostrar un nuevo párrafo cada segundo
+        }, 200);
 
         return () => clearInterval(interval);
     }, []);
@@ -79,7 +78,6 @@ export function Chat({
         const messageText = presetQuestion || inputValue;
         if (!messageText.trim()) return;
 
-        // Validación mejorada de productos
         console.log("Productos disponibles:", productosDisponibles);
         console.log("Productos seleccionados:", productosSeleccionados);
 
@@ -98,7 +96,6 @@ export function Chat({
             return;
         }
 
-        // Verificar la estructura de los productos
         const validProducts = productosDisponibles.every(
             (p) =>
                 p.id &&
@@ -156,7 +153,6 @@ export function Chat({
 
             const parts = data.response.split("\n\n").filter(Boolean);
 
-            // Check if the response includes products to add
             if (data.productos && data.productos.length > 0 && onAddToCart) {
                 onAddToCart(data.productos);
             }
@@ -189,7 +185,6 @@ export function Chat({
                 <CardTitle>Chat Asistente</CardTitle>
             </CardHeader>
             <CardContent className="flex-grow overflow-y-auto space-y-4">
-                {/* Preset Questions */}
                 {messages.length === 0 && (
                     <div className="flex flex-col gap-2 w-full">
                         {presetQuestions.map((question, index) => (
@@ -205,7 +200,6 @@ export function Chat({
                     </div>
                 )}
 
-                {/* Chat Messages */}
                 {messages.map((message, index) => (
                     <div
                         key={index}

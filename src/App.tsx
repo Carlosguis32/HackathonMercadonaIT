@@ -12,7 +12,6 @@ import { Badge } from "./components/ui/badge";
 import { Button } from "./components/ui/button";
 import { Chat } from "./components/ui/chat";
 
-// Definición del tipo para los productos
 interface Producto {
     id: string;
     nombre: string;
@@ -29,7 +28,6 @@ function App() {
     const [error, setError] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    // Función para filtrar productos
     const filterProductos = (productos: Producto[]) => {
         const term = searchTerm.toLowerCase();
         return productos.filter(
@@ -39,7 +37,6 @@ function App() {
         );
     };
 
-    // Funciones para manejar la cantidad de productos
     const incrementarCantidad = (id: string) => {
         setListaDos((prevList) =>
             prevList.map((producto) =>
@@ -144,28 +141,6 @@ function App() {
         setDragging(null);
     };
 
-    const handleRefresh = () => {
-        setLoading(true);
-        fetch("http://localhost:3001/api/productos")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Error al obtener los productos");
-                }
-                return response.json();
-            })
-            .then((data: Producto[]) => {
-                setListaUno(data);
-                setError(null);
-            })
-            .catch((err) => {
-                console.error("Error:", err);
-                setError("No se pudieron cargar los productos.");
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
-
     const handleEmptyCart = () => {
         setListaUno((prev) => [
             ...prev,
@@ -212,14 +187,36 @@ function App() {
                     Productos disponibles
                 </h1>
 
-                <div className="mb-6 flex justify-center">
-                    <input
-                        type="text"
-                        placeholder="Buscar productos..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="px-4 py-2 border border-green-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
+                <div className="mb-6 flex justify-center items-center">
+                    <div className="relative flex items-center">
+                        <input
+                            type="text"
+                            placeholder="Buscar productos..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="px-4 py-2 border border-green-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="ml-2 text-green-700 hover:text-green-800 hover:bg-green-100"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.3-4.3" />
+                            </svg>
+                        </Button>
+                    </div>
                 </div>
 
                 {error && (
@@ -233,7 +230,6 @@ function App() {
                 )}
 
                 <div className="flex flex-col md:flex-row gap-8">
-                    {/* Lista Uno - Usando Card de Shadcn */}
                     <Card className="flex-1">
                         <CardHeader>
                             <CardTitle className="text-green-800">
@@ -312,7 +308,6 @@ function App() {
                         </CardFooter>
                     </Card>
 
-                    {/* Lista Dos - Usando Card de Shadcn */}
                     <Card className="flex-1">
                         <CardHeader>
                             <CardTitle className="text-green-800">
@@ -441,7 +436,6 @@ function App() {
                 </div>
             </div>
 
-            {/* Chat section */}
             <div className="w-100 border-l p-4 bg-white">
                 <Chat
                     productosDisponibles={listaUno}

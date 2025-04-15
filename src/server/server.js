@@ -3,13 +3,11 @@ import cors from "cors";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Initialize Google AI client
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
@@ -17,7 +15,6 @@ app.use(cors());
 app.use(express.json());
 
 const productos = [
-    // Frutas
     {
         id: "1",
         nombre: "Manzanas",
@@ -89,7 +86,6 @@ const productos = [
         imagen: "/images/Melón.png",
     },
 
-    // Verduras
     {
         id: "11",
         nombre: "Tomates",
@@ -154,7 +150,6 @@ const productos = [
         imagen: "/images/Lechugas.png",
     },
 
-    // Lácteos
     {
         id: "20",
         nombre: "Leche Entera",
@@ -212,7 +207,6 @@ const productos = [
         imagen: "/images/Queso Rallado.png",
     },
 
-    // Panadería
     {
         id: "35",
         nombre: "Magdalenas",
@@ -242,7 +236,6 @@ const productos = [
         imagen: "/images/Palmeras.png",
     },
 
-    // Carnicería
     {
         id: "41",
         nombre: "Pollo Entero",
@@ -257,7 +250,6 @@ const productos = [
         precio: 1.2,
         imagen: "/images/Huevos.png",
     },
-    // ...existing code for other meat products with placeholder images...
 ];
 
 app.get("/api/productos", (req, res) => {
@@ -278,7 +270,6 @@ app.post("/api/chat", async (req, res) => {
         const { prompt, productosDisponibles, productosSeleccionados } =
             req.body;
 
-        // Validación mejorada
         console.log("\n=== Nueva solicitud de chat ===");
         console.log("Prompt recibido:", prompt);
         console.log(
@@ -298,7 +289,6 @@ app.post("/api/chat", async (req, res) => {
             throw new Error("No hay productos disponibles");
         }
 
-        // Crear listas formateadas de productos
         const productosDisponiblesText = productosDisponibles
             .map((p) => `${p.nombre} (${p.categoria}) - ${p.precio}€`)
             .join("\n");
@@ -341,7 +331,6 @@ app.post("/api/chat", async (req, res) => {
         const response = await result.response;
         const text = response.text();
 
-        // Analizar la respuesta para detectar productos mencionados
         const productosParaAñadir = [];
         if (
             prompt.toLowerCase().includes("añade") ||
@@ -361,7 +350,6 @@ app.post("/api/chat", async (req, res) => {
         console.log("Productos detectados para añadir:", productosParaAñadir);
         console.log("=== Fin de la solicitud ===\n");
 
-        // Dividir la respuesta en párrafos
         const paragraphs = text
             .split("\n\n")
             .filter((p) => p.trim())
