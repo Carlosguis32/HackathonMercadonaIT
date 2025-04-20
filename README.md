@@ -31,7 +31,7 @@ An intelligent shopping assistant to enhance the customer experience at Mercadon
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/HackathonMercadonaIT.git
+git clone https://github.com/Carlosguis32/HackathonMercadonaIT.git
 cd HackathonMercadonaIT
 ```
 
