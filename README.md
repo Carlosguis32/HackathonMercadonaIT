@@ -1,6 +1,6 @@
 # 🛒 Hackathon Mercadona IT
 
-An intelligent shopping assistant to enhance the customer experience at Mercadona.
+An intelligent shopping assistant to enhance the customer experience at Mercadona. This project uses artificial intelligence to provide personalized shopping experiences, smart product recommendations, and interactive assistance to Mercadona customers.
 
 ![Mercadona Logo](./src/assets/mercadona.png)
 
@@ -11,6 +11,12 @@ An intelligent shopping assistant to enhance the customer experience at Mercadon
 -   🥗 **Recipe Tips**: Get cooking ideas with available products
 -   🏪 **Catalog Integration**: Direct access to Mercadona products
 -   🔍 **Smart Search**: Easily find what you need
+
+## 🔧 Prerequisites
+
+-   Node.js 18.0 or higher
+-   npm or yarn
+-   A Google Cloud account for Gemini API access
 
 ## 🚀 Technologies
 
@@ -35,7 +41,13 @@ cd HackathonMercadonaIT
 npm install
 ```
 
-3. Start the development server:
+3. Create a `.env` file with an API key for Gemini:
+
+```bash
+GOOGLE_API_KEY=yourApiKey
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
